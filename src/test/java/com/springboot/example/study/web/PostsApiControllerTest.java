@@ -64,7 +64,6 @@ public class PostsApiControllerTest {
     @Test
     @WithMockUser(roles="USER")
     public void Posts_등록된다() throws Exception {
-        //given
         String title = "title";
         String content = "content";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
@@ -91,7 +90,6 @@ public class PostsApiControllerTest {
     @Test
     @WithMockUser(roles="USER")
     public void Posts_수정된다() throws Exception {
-        //given
         Posts savedPosts = postsRepository.save(Posts.builder()
                 .title("title")
                 .content("content")
@@ -109,7 +107,6 @@ public class PostsApiControllerTest {
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
 
-        //when
         mvc.perform(put(url)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
