@@ -7,7 +7,7 @@
             <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
 
             {{#userName}}
-                Logged in as: <span id="user">{{userName}}</span>
+                Logged in as: <img width="50px" height="50px" src="{{userPicture}}"/> <span id="user">{{userEmail}}</span>
 
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>
             {{/userName}}
