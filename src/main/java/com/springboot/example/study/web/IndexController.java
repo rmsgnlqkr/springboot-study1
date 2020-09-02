@@ -2,6 +2,7 @@ package com.springboot.example.study.web;
 
 import javax.servlet.http.HttpSession;
 
+import com.springboot.example.study.config.auth.dto.SessionUser;
 import com.springboot.example.study.service.posts.PostsService;
 import com.springboot.example.study.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
-
     private final PostsService postsService;
     private final HttpSession httpSession;
 
@@ -21,6 +21,11 @@ public class IndexController {
     public String index(Model model) {
 
         model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user = (SessionUser)httpSession.getAttribute("user");
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
 
         return "index";
     }
@@ -34,7 +39,6 @@ public class IndexController {
     public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
         model.addAttribute("post", dto);
-
         return "posts-update";
     }
 }
